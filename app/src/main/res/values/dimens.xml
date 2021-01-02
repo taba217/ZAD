@@ -2,4 +2,14 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="search_radius">8dp</dimen>
+    <dimen name="search_margins">12dp</dimen>
+    <dimen name="lec_card_radius">12dp</dimen>
+    <dimen name="home_Fragment_margins">12dp</dimen>
+    <dimen name="news_card_margins">8dp</dimen>
+    <dimen name="news_card_lec_name_margins">12dp</dimen>
+    <dimen name="news_card_lec_shak_name_padding">4dp</dimen>
+    <dimen name="categories_title_padding">4dp</dimen>
+    <dimen name="categories_card_radius">10dp</dimen>
+    <dimen name="categories_card_padding">6dp</dimen>
 </resources>
