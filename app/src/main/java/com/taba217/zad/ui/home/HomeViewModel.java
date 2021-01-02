@@ -1,10 +1,11 @@
 package com.taba217.zad.ui.home;
 
-import android.os.CountDownTimer;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.taba217.zad.models.ItemCategory;
+import com.taba217.zad.models.LecItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +31,6 @@ public class HomeViewModel extends ViewModel {
         List<ItemCategory> itemCategories = new ArrayList<>();
         itemCategories.add(new ItemCategory("title", "image", lecItems));
         categoryMutableLiveData.setValue(itemCategories);
-
-        new CountDownTimer(2000, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-
-            }
-
-            @Override
-            public void onFinish() {
-
-                itemCategories.add(new ItemCategory("title", "image", lecItems));
-                categoryMutableLiveData.setValue(itemCategories);
-            }
-        }.start();
     }
 
     public LiveData<List<ItemCategory>> getdata() {
