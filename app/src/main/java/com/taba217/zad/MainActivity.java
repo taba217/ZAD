@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.shape.CornerFamily;
+import com.google.android.material.shape.MaterialShapeDrawable;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -21,8 +23,9 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        //Corner radius
+        radiusNav(navView);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setCollapsible(true);
         setSupportActionBar(toolbar);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -34,5 +37,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-
+    private void radiusNav(BottomNavigationView navView) {
+        float radius = getResources().getDimension(R.dimen.lec_card_radius);
+        MaterialShapeDrawable bottomBarBackground = (MaterialShapeDrawable) navView.getBackground();
+        bottomBarBackground.setShapeAppearanceModel(
+                bottomBarBackground.getShapeAppearanceModel()
+                        .toBuilder()
+                        .setTopRightCorner(CornerFamily.ROUNDED, radius)
+                        .setTopLeftCorner(CornerFamily.ROUNDED, radius)
+                        .build());
+    }
 }

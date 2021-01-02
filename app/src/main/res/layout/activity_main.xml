@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layoutDirection="rtl">
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -13,7 +14,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="?android:attr/windowBackground"
-        app:elevation="8dp"
+        app:elevation="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintCircleRadius="8dp"
         app:layout_constraintLeft_toLeftOf="parent"

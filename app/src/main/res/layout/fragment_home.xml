@@ -32,13 +32,28 @@
                 android:layout_marginBottom="@dimen/search_margins"
                 app:cardCornerRadius="@dimen/search_radius">
 
-                <androidx.appcompat.widget.SearchView
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@color/search_background"
-                    android:lineSpacingExtra="0dp"
-                    android:lineSpacingMultiplier="0"
-                    app:iconifiedByDefault="true" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/search_background">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/search_background"
+                        android:src="@drawable/ic_baseline_search_24"
+                        android:padding="8dp"
+                        android:ems="3" />
+
+                    <androidx.appcompat.widget.SearchView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:iconifiedByDefault="false"
+                        app:defaultQueryHint="@string/search_hint"
+                        app:iconifiedByDefault="true"
+                        app:queryHint="@string/search_hint"
+                        app:searchIcon="@drawable/ic_baseline_search_24" />
+                </FrameLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
