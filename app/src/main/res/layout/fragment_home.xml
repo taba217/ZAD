@@ -37,12 +37,11 @@
                     android:layout_height="wrap_content"
                     android:background="@color/search_background">
 
-                    <androidx.appcompat.widget.AppCompatImageView
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@drawable/search_background"
-                        android:src="@drawable/ic_baseline_search_24"
-                        android:padding="8dp"
+                        android:textSize="12sp"
                         android:ems="3" />
 
                     <androidx.appcompat.widget.SearchView
@@ -133,7 +132,7 @@
             android:id="@+id/linearLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="4dp"
+            android:layout_margin="@dimen/news_card_margins_bottom"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -149,7 +148,6 @@
                 tools:layout_editor_absoluteX="14dp" />
 
             <LinearLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
