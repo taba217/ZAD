@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="?android:actionBarSize">
+    android:layout_marginTop="?android:actionBarSize"
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -41,8 +42,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="@drawable/search_background"
-                        android:textSize="12sp"
-                        android:ems="3" />
+                        android:ems="3"
+                        android:textSize="12sp" />
 
                     <androidx.appcompat.widget.SearchView
                         android:layout_width="match_parent"
@@ -162,6 +163,7 @@
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
+                        style="@style/main_categories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -196,6 +198,7 @@
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
+                        style="@style/main_categories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -230,6 +233,7 @@
                     app:cardUseCompatPadding="true">
 
                     <LinearLayout
+                        style="@style/main_categories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

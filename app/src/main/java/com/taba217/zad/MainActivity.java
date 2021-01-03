@@ -1,11 +1,15 @@
 package com.taba217.zad;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.MaterialShapeDrawable;
+import com.taba217.zad.ui.maincategories.MainCategories;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -46,5 +50,11 @@ public class MainActivity extends AppCompatActivity {
                         .setTopRightCorner(CornerFamily.ROUNDED, radius)
                         .setTopLeftCorner(CornerFamily.ROUNDED, radius)
                         .build());
+    }
+
+    public void categoryClick(View view) {
+        Toast.makeText(this, "categry click handler", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, MainCategoriesActivity.class)
+                .putExtra("category_type", "1"));
     }
 }

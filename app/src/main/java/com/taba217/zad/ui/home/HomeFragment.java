@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
         homeViewModel.getdata().observe(getViewLifecycleOwner(), new Observer<List<ItemCategory>>() {
             @Override
             public void onChanged(List<ItemCategory> itemCategories) {
-                Toast.makeText(getActivity(), "onChanged " + itemCategories.get(0).getLecs().get(0).getLecName(), Toast.LENGTH_SHORT).show();
+              //  Toast.makeText(getActivity(), "onChanged " + itemCategories.get(0).getLecs().get(0).getLecName(), Toast.LENGTH_SHORT).show();
                 adapter.setItemCategory(itemCategories);
             }
         });

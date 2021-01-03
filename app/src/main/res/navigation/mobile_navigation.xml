@@ -22,4 +22,9 @@
         android:name="com.taba217.zad.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/mainCategories"
+        android:name="com.taba217.zad.ui.maincategories.MainCategories"
+        android:label="@string/main_categories"
+        tools:layout="@layout/fragment_maincategories" />
 </navigation>
