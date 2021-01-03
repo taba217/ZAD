@@ -49,8 +49,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:iconifiedByDefault="false"
+                        android:layoutDirection="rtl"
                         app:defaultQueryHint="@string/search_hint"
-                        app:iconifiedByDefault="true"
                         app:queryHint="@string/search_hint"
                         app:searchIcon="@drawable/ic_baseline_search_24" />
                 </FrameLayout>
@@ -175,7 +175,7 @@
                             style="@style/lec_item_title_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/ic_baseline_music_note_24"
+                            android:drawableTop="@drawable/ic_album"
                             android:text="الصوتيات" />
 
                         <TextView
@@ -210,7 +210,7 @@
                             style="@style/lec_item_title_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/ic_baseline_music_note_24"
+                            android:drawableTop="@drawable/ic_album"
                             android:text="الصوتيات" />
 
                         <TextView
@@ -245,7 +245,7 @@
                             style="@style/lec_item_title_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:drawableTop="@drawable/ic_baseline_music_note_24"
+                            android:drawableTop="@drawable/ic_headset"
                             android:text="الصوتيات" />
 
                         <TextView

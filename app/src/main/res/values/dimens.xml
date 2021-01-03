@@ -17,4 +17,5 @@
     <dimen name="home_child_margins">16dp</dimen>
     <dimen name="card_item_margins">4dp</dimen>
     <dimen name="home_news_card_margins">30dp</dimen>
+    <dimen name="recycler_margin_top" >10dp</dimen>
 </resources>
