@@ -27,4 +27,11 @@
         android:name="com.taba217.zad.ui.maincategories.MainCategories"
         android:label="@string/main_categories"
         tools:layout="@layout/fragment_maincategories" />
+    <fragment
+        android:id="@+id/mediaFragment"
+        android:name="com.taba217.zad.ui.mediaplayer.MediaFragment"
+        android:label="MediaFragment"
+        tools:layout="@layout/fragment_maincategories"/>
+
+
 </navigation>
