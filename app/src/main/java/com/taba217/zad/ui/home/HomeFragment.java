@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.taba217.zad.R;
-import com.taba217.zad.models.ItemCategory;
+import com.taba217.zad.models.Lecturer;
 import com.taba217.zad.ui.mainrecycler.HorizontalRecyclerTitle;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     HorizontalRecyclerTitle adapter;
-    List<ItemCategory> items;
+    List<Lecturer> items;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -32,11 +32,11 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         items = new ArrayList<>();
 
-        homeViewModel.getdata().observe(getViewLifecycleOwner(), new Observer<List<ItemCategory>>() {
+        homeViewModel.getdata().observe(getViewLifecycleOwner(), new Observer<List<Lecturer>>() {
             @Override
-            public void onChanged(List<ItemCategory> itemCategories) {
-              //  Toast.makeText(getActivity(), "onChanged " + itemCategories.get(0).getLecs().get(0).getLecName(), Toast.LENGTH_SHORT).show();
-                adapter.setItemCategory(itemCategories);
+            public void onChanged(List<Lecturer> itemCategories) {
+              //  Toast.makeText(getActivity(), "onChanged " + itemCategories.get(0).getlecture_series().get(0).getLecName(), Toast.LENGTH_SHORT).show();
+                adapter.setLecturer(itemCategories);
             }
         });
 
