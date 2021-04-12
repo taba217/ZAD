@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">زاد</string>
+    <string name="main_categories">الأقسام الرئيسية</string>
+    <string name="title_home">الرئيسية</string>
+    <string name="title_dashboard">ادارة</string>
+    <string name="title_notifications">التنبيهات</string>
+    <string name="search_hint">ابحث عن شيخ،محاضرات،ندوات</string>
+</resources>
