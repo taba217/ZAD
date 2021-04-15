@@ -73,6 +73,7 @@ public class HorizontalRecyclerTitle extends RecyclerView.Adapter<HorizontalRecy
                     LinearLayoutManager.HORIZONTAL,
                     false
             );
+
             layoutManager.setInitialPrefetchItemCount(mealitems.get(position).size());
 //            ArrayList<mealitem> mealitems = new ArrayList<>();
 //            mealitems.add(new mealitem("meal", "food", "120", "", new ArrayList<>(Arrays.asList("120", "145", "66"))));
@@ -85,13 +86,6 @@ public class HorizontalRecyclerTitle extends RecyclerView.Adapter<HorizontalRecy
             CardStackAdapter cardStackAdapter = new CardStackAdapter(context, mealitems.get(position));
             //  LinearLayoutManager layoutManager new LinearLayoutManager(context)
             holder.recyclerView.setLayoutManager(layoutManager);
-
-            cardStackAdapter.setOnItemClickListener(new CardStackAdapter.onItemClickListener() {
-                @Override
-                public void onItemClick(int i) {
-                    Toast.makeText(context, i+"", Toast.LENGTH_SHORT).show();
-                }
-            });
             holder.recyclerView.setAdapter(cardStackAdapter);
         }
     }
@@ -109,11 +103,8 @@ public class HorizontalRecyclerTitle extends RecyclerView.Adapter<HorizontalRecy
             Lecturer_title = itemView.findViewById(R.id.categories_title);
             recyclerView = itemView.findViewById(R.id.horizntal_recycler);
             // status.setEnabled(false);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+            itemView.setOnClickListener(v -> {
 
-                }
             });
         }
 

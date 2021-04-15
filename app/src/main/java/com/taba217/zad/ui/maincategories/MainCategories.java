@@ -50,6 +50,7 @@ public class MainCategories extends Fragment {
             @Override
             public void onChanged(List<Lecturer> itemCategories) {
                 adapter.setLecturer(itemCategories);
+                Lecturers.addAll(itemCategories);
             }
         });
         return root;
@@ -72,14 +73,7 @@ public class MainCategories extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 MainCategoriesViewModel viewModel = new MainCategoriesViewModel();
                 viewModel.getData();
-                NavController navController = Navigation.findNavController(getActivity(), R.id.categories_nav_view);
-                NavigationUI.setupActionBarWithNavController((AppCompatActivity) getActivity(), navController);
-                navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-                    @Override
-                    public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-//                        navController.navigate(R.id.mediaFragment);
-                    }
-                });
+
             }
 
             @Override

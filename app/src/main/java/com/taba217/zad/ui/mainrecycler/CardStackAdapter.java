@@ -1,12 +1,21 @@
 package com.taba217.zad.ui.mainrecycler;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.taba217.zad.R;
@@ -26,6 +35,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.Hold
     onItemClickListener listener;
     private ArrayList<LectureItem> lectures;
     private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    Bundle bundle = new Bundle();
 
     public interface onItemClickListener {
         void onItemClick(int i);
@@ -52,12 +62,16 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.Hold
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         LectureItem lecture = lectures.get(position);
         Log.i("meals", lecture.getName());
-
+        Log.i("lectures size", lectures.size() + "");
+        for (LectureItem lectureItem : lectures
+        ) {
+            Log.i("all data in CSA", lectureItem.getName());
+        }
         ArrayList<LectureItem> mealitemsfull = new ArrayList<>();
         mealitemsfull.add(lecture);
-        if (lecture.getTypeId()==5)
-            //for (int i = 1; i <= lecture.getPrices().length; i++)
-            mealitemsfull.add(lecture);
+        if (lecture.getLectureSeries() != null)
+            for (int i = 1; i <= lecture.getLectureSeries().size(); i++)
+                mealitemsfull.add(lecture);
         cardstack(mealitemsfull);
     }
 
@@ -71,15 +85,31 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.Hold
         cardStackLayoutManager.setStackFrom(StackFrom.Bottom);
         HorizotalRecyclerChild adapter = new HorizotalRecyclerChild(context, items);
         card.setAdapter(adapter);
+
         for (LectureItem item : items) {
-            if (item.getTypeId()==1)//string of lectures as lecture_series
-//                adapter.setOnItemClickListener(i -> );
-                cardStackLayoutManager.setVisibleCount(3);
+//            if (item.getTypeId() == 1)//string of lectures as lecture_series
+            cardStackLayoutManager.setVisibleCount(3);
+            adapter.setOnItemClickListener(i -> {
+                bundle.putInt("lecture_id", item.getId());
+                navigate(bundle);
+            });
+//                    Toast.makeText(context, item.getName() , Toast.LENGTH_SHORT).show());
             cardStackLayoutManager.setTranslationInterval(5.0f);//margin between cards
             card.setLayoutManager(cardStackLayoutManager);
         }
         // }
         // }
+    }
+
+    private void navigate(Bundle bundle) {
+        NavController navController = Navigation.findNavController((AppCompatActivity) context, R.id.categories_nav_view);
+        NavigationUI.setupActionBarWithNavController((AppCompatActivity) context, navController);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                navController.navigate(R.id.mediaFragment, bundle);
+            }
+        });
     }
 
     CardStackView card;

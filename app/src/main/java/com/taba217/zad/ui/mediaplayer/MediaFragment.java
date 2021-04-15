@@ -31,8 +31,10 @@ import com.google.android.exoplayer2.ui.StyledPlayerControlView;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Log;
 import com.google.android.exoplayer2.util.Util;
 import com.taba217.zad.R;
+import com.taba217.zad.connction.Connect;
 import com.taba217.zad.models.LectureItem;
 import com.taba217.zad.models.LectureSeriesItem;
 import com.taba217.zad.models.Lecturer;
@@ -41,6 +43,10 @@ import com.taba217.zad.ui.mediarecycler.MediaAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
@@ -55,28 +61,31 @@ public class MediaFragment extends Fragment {
     SimpleExoPlayer player;
     View rootplayer;
 
+    Bundle bundle = new Bundle();
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mediaModelView = new ViewModelProvider(this).get(MediaModelView.class);
         View root = inflater.inflate(R.layout.fragment_media, container, false);
         items = new ArrayList<>();
 
-
         playerview = root.findViewById(R.id.player);
         playerview.setOnFocusChangeListener((v, hasFocus) -> {
             Toast.makeText(getActivity(), "hasFocus changed to " + hasFocus, Toast.LENGTH_SHORT).show();
             //   changePlayerSize(hasFocus, v, inflater, container);
         });
-//        mediaModelView.getdata().observe(getViewLifecycleOwner(), new Observer<ArrayList<LectureItem>>() {
-//            @Override
-//            public void onChanged(ArrayList<LectureItem> lectures) {
-//                adapter.setItems(lectures);
-//                items.addAll(lectures);
-//            }
-//        });
+        mediaModelView.getdata().observe(getViewLifecycleOwner(), new Observer<LectureItem>() {
+            @Override
+            public void onChanged(LectureItem lecture) {
+                adapter.setItems((ArrayList<LectureSeriesItem>) lecture.getLectureSeries());
+                items.addAll(lecture.getLectureSeries());
+            }
+        });
 
         return root;
     }
+
+
 
 
     private void changePlayerSize(boolean hasFocus, View v, LayoutInflater inflater, ViewGroup container) {

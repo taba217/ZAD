@@ -28,7 +28,7 @@ public class HorizotalRecyclerChild extends RecyclerView.Adapter<HorizotalRecycl
     private Context context;
     private ArrayList<LectureItem> lectures;
     private ArrayList<LectureItem> alllectures;
-    int donor;
+
 
     public HorizotalRecyclerChild(Context context, ArrayList<LectureItem> items) {
         this.context = context;
@@ -60,6 +60,11 @@ public class HorizotalRecyclerChild extends RecyclerView.Adapter<HorizotalRecycl
         // Drawable drawable = icons.getDrawable(position);
         //int resID = getResId("icon", R.drawable.class); // or other resource class
         //   cardstack(mealitem.getPrices());
+        Log.i("lectures size",lectures.size()+"");
+        for (LectureItem lectureItem : lectures
+        ) {
+            Log.i("all data in HRC", lectureItem.getName());
+        }
         Log.i("meals in h Recyc chid ", lecture.getName());
         holder.lecName.setText(lecture.getName());
         Picasso.get()
@@ -72,7 +77,6 @@ public class HorizotalRecyclerChild extends RecyclerView.Adapter<HorizotalRecycl
     static class CustumViewHolder extends RecyclerView.ViewHolder {
         TextView lecName;
         ImageView lecImage;
-
 
         CustumViewHolder(@NonNull View itemView, final onItemClickListener listener) {
             super(itemView);
