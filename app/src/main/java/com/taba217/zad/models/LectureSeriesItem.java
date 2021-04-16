@@ -10,6 +10,17 @@ public class LectureSeriesItem{
 	private String url;
 	private String status;
 
+	public LectureSeriesItem(int lectureId, String size, String updatedAt, String name, String createdAt, int id, String url, String status) {
+		this.lectureId = lectureId;
+		this.size = size;
+		this.updatedAt = updatedAt;
+		this.name = name;
+		this.createdAt = createdAt;
+		this.id = id;
+		this.url = url;
+		this.status = status;
+	}
+
 	public int getLectureId(){
 		return lectureId;
 	}

@@ -22,19 +22,18 @@ public class MediaModelView extends ViewModel {
 
     public MediaModelView() {
         lectureItemMutableLiveData = new MutableLiveData<>();
-        getData();
     }
 
-    private void getData() {
+    public void getData(int id) {
             new Connect()
                     .connectTo()
-                    .getlecture(1)//bundle.getInt("lecture_id"))
+                    .getlecture(id)//bundle.getInt("lecture_id"))
                     .enqueue(new Callback<LectureItem>() {
                         @Override
                         public void onResponse(Call<LectureItem> call, Response<LectureItem> response) {
-                            lectureItemMutableLiveData.setValue(response.body());
-                            Log.i("lecture", response.body().getName());
                             Log.i("lecture", response.raw() + "");
+//                            Log.i("lecture", response.body().getLectureSeries().get(0).getName());
+                            lectureItemMutableLiveData.setValue(response.body());
                         }
 
                         @Override
@@ -45,7 +44,8 @@ public class MediaModelView extends ViewModel {
                     });
         }
 
-    public LiveData<LectureItem> getdata() {
+    public LiveData<LectureItem> getdata(int id) {
+        getData(id);
         return lectureItemMutableLiveData;
     }
 

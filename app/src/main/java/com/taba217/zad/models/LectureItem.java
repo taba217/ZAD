@@ -1,9 +1,12 @@
 package com.taba217.zad.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class LectureItem{
 	private Object image;
+	@SerializedName("lecture_series")
 	private List<LectureSeriesItem> lectureSeries;
 	private String size;
 	private Object updatedAt;

@@ -23,11 +23,12 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.Holder> {
     Context context;
     ArrayList<LectureSeriesItem> lectures;
     onItemClickListener listener;
-//    private ArrayList<LectureItem> lectures;
+    LectureItem lectureItem;
 
-    public void setItems(ArrayList<LectureSeriesItem> lectures) {
-        this.lectures=new ArrayList<>();
-        this.lectures=lectures;
+
+    public void setItems(LectureItem lecture) {
+        lectureItem = lecture;
+        this.lectures = new ArrayList<>(lecture.getLectureSeries());
     }
 
     public interface onItemClickListener {
@@ -38,10 +39,9 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.Holder> {
         this.listener = listener;
     }
 
-    public MediaAdapter(Context context, ArrayList<LectureSeriesItem> lectures) {
+    public MediaAdapter(Context context) {
         this.context = context;
-        this.lectures = lectures;
-        // mealitems = new ArrayList<>();
+        lectures=new ArrayList<>();
     }
 
     @NotNull
@@ -54,28 +54,29 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.Holder> {
     @Override
     public void onBindViewHolder(@NonNull Holder holder, int position) {
         LectureSeriesItem lecture = lectures.get(position);
-        Log.i("meals", lecture.getName());
+        Log.i("media adapter on ", lecture.getName() + "");
 
-        holder.lec.setText(lecture.getName());
-//        holder.shak.setText(lecture.getLecturerId());
-//        holder.episode.setText(lecture.getTypeId());
-
+        holder.lec.setText(lectureItem.getName());
+        holder.lecturer.setText(lectureItem.getLecturerId()+"");
+        holder.series.setText(lecture.getName());
     }
 
     @Override
     public int getItemCount() {
-        return lectures.size();
+        if (lectures.size() != 0)
+            return lectures.size();
+        return 0;
     }
 
 
     public static class Holder extends RecyclerView.ViewHolder {
-        TextView shak, lec, episode;
+        TextView lecturer, lec, series;
 
         public Holder(View itemView, final onItemClickListener listener) {
             super(itemView);
-            shak = itemView.findViewById(R.id.shak_name);
+            lecturer = itemView.findViewById(R.id.lecturer_name);
             lec = itemView.findViewById(R.id.lec_name);
-            episode = itemView.findViewById(R.id.episode);
+            series = itemView.findViewById(R.id.series);
             itemView.setOnClickListener(v -> {
                 if (listener != null) {
                     int i = getAdapterPosition();

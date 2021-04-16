@@ -24,7 +24,7 @@
 
             <TextView
                 style="@style/media_list_text"
-                android:id="@+id/episode"
+                android:id="@+id/series"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="المحاضرة 1" />
@@ -34,7 +34,7 @@
               android:layout_height="wrap_content"
               android:orientation="horizontal">
                 <TextView
-                android:id="@+id/shak_name"
+                android:id="@+id/lecturer_name"
                 style="@style/media_list_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,6 +52,8 @@
                 style="@style/media_list_text"
                 android:id="@+id/lec_name"
                 android:layout_width="wrap_content"
+                  android:marqueeRepeatLimit="marquee_forever"
+                  android:maxLines="1"
                 android:layout_height="wrap_content"
                 android:text="سلسلة مدارج السالكين" />
           </LinearLayout>
@@ -101,8 +103,8 @@
             app:cardElevation="0dp">
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="74dp"
-                android:layout_height="72dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@mipmap/shak" />
         </androidx.cardview.widget.CardView>
 

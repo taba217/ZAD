@@ -31,7 +31,12 @@
         android:id="@+id/mediaFragment"
         android:name="com.taba217.zad.ui.mediaplayer.MediaFragment"
         android:label="MediaFragment"
-        tools:layout="@layout/fragment_maincategories"/>
+        tools:layout="@layout/fragment_maincategories">
+        <argument
+            android:name="lecture_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
 
 </navigation>

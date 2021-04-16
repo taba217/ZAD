@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -56,12 +58,13 @@ public class MediaFragment extends Fragment {
 
     private MediaModelView mediaModelView;
     MediaAdapter adapter;
-    List<LectureSeriesItem> items;
+    ArrayList<LectureSeriesItem> items;
     PlayerControlView playerview;
     SimpleExoPlayer player;
     View rootplayer;
-
-    Bundle bundle = new Bundle();
+    TextView series, lec_name;
+    ProgressBar loading;
+    LectureItem lectureItem;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -70,22 +73,50 @@ public class MediaFragment extends Fragment {
         items = new ArrayList<>();
 
         playerview = root.findViewById(R.id.player);
+        series = playerview.findViewById(R.id.series);
+        lec_name = playerview.findViewById(R.id.lec_name);
+        loading = playerview.findViewById(R.id.loading_lec);
+
         playerview.setOnFocusChangeListener((v, hasFocus) -> {
             Toast.makeText(getActivity(), "hasFocus changed to " + hasFocus, Toast.LENGTH_SHORT).show();
             //   changePlayerSize(hasFocus, v, inflater, container);
         });
-        mediaModelView.getdata().observe(getViewLifecycleOwner(), new Observer<LectureItem>() {
+        mediaModelView.getdata(getArguments().getInt("lecture_id")).observe(getViewLifecycleOwner(), new Observer<LectureItem>() {
             @Override
             public void onChanged(LectureItem lecture) {
-                adapter.setItems((ArrayList<LectureSeriesItem>) lecture.getLectureSeries());
+                lectureItem = lecture;
+                adapter.setItems(lecture);
                 items.addAll(lecture.getLectureSeries());
+                adapter.notifyItemRangeInserted(0, lecture.getLectureSeries().size());
             }
         });
-
         return root;
     }
 
 
+    RecyclerView recyclerView;
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        adapter = new MediaAdapter(getActivity());
+        adapter.setOnItemClickListener(new MediaAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int i) {
+                player = MediaPlayer.getInstance(getActivity(), playerview, items);
+                lec_name.setText(lectureItem.getName());
+                series.setText(items.get(i).getName());
+                loading.setVisibility(VISIBLE);
+                playerview.setVisibility(VISIBLE);
+                player.play();
+            }
+        });
+        recyclerView = view.findViewById(R.id.media_recycler);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.hasFixedSize();
+        recyclerView.setAdapter(adapter);
+
+    }
 
 
     private void changePlayerSize(boolean hasFocus, View v, LayoutInflater inflater, ViewGroup container) {
@@ -99,22 +130,4 @@ public class MediaFragment extends Fragment {
             playerview.addView(rootplayer);
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        adapter = new MediaAdapter(getActivity(), (ArrayList<LectureSeriesItem>) items);
-        adapter.setOnItemClickListener(new MediaAdapter.onItemClickListener() {
-            @Override
-            public void onItemClick(int i) {
-                player = MediaPlayer.getInstance(getActivity(), playerview, (ArrayList<LectureSeriesItem>) items);
-                player.play();
-                playerview.setVisibility(VISIBLE);
-
-            }
-        });
-        RecyclerView recyclerView = view.findViewById(R.id.media_recycler);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.hasFixedSize();
-        recyclerView.setAdapter(adapter);
-    }
 }

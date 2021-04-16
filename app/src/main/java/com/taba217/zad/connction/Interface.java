@@ -17,6 +17,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
@@ -26,15 +27,16 @@ public interface Interface {
     @GET("lecture/add")
 //    @FormUrlEncoded
     Call<List<LectureSeriesItem>> addLecture(@Query("name") String name,
-                                       @Query("url") String url,
-                                       @Query("type_id") String type_id,
-                                       @Query("image") String image,
-                                       @Query("lecturer") String lecturer);// @Query("urls") ArrayList<String> urls);
+                                             @Query("url") String url,
+                                             @Query("type_id") String type_id,
+                                             @Query("image") String image,
+                                             @Query("lecturer") String lecturer);// @Query("urls") ArrayList<String> urls);
+
     @GET("lecture/news")
     Call<List<Lecturer>> getlatest();
 
     @GET("lecture/get/{id}")
-    Call<LectureItem> getlecture(int id);
+    Call<LectureItem> getlecture(@Path("id") int id);
 //    ") ArrayList<String> learning_objective_uuids, @Field("user_uuids[]") ArrayList<String> user_uuids, @Field("note") String note,
 
 //    @GET("sendReport.php")
@@ -48,7 +50,6 @@ public interface Interface {
 //
 //    @GET("getrestrants.php")
 //    Call<List<Restrant>>  getrestrants(@Query("type") int i);
-
 
 
 }

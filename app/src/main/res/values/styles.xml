@@ -81,7 +81,7 @@
         <item name="android:padding">4dp</item>
     </style>
 
-    <style name="shak_name_fragment_media">
+    <style name="lecturer_name_fragment_media">
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
         <item name="android:textSize">@dimen/titles_text_size</item>
         <item name="android:layout_margin">@dimen/fragment_media_child_margins</item>
@@ -96,6 +96,7 @@
     </style>
 
     <style name="media_list_text">
+        <item name="android:layout_margin">4dp</item>
         <item name="android:textSize">12sp</item>
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
     </style>
@@ -106,9 +107,10 @@
     </style>
 
     <style name="exo_lec_text">
+        <item name="android:layout_margin">4dp</item>
         <item name="android:marqueeRepeatLimit">marquee_forever</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 
