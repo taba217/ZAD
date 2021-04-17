@@ -34,26 +34,31 @@ public class MediaPlayer {
     public static PlayerNotificationManager playerNotificationManager;
     static ProgressBar loading;
     static PlayerControlView playerView;
+    static TextView title;
+    static TextView content;
     private static PlayerNotificationManager.MediaDescriptionAdapter mediaDescriptionAdapter = new PlayerNotificationManager
             .MediaDescriptionAdapter() {
         @Override
         public String getCurrentSubText(Player player) {
-            return "Sub text";
+            title = playerView.findViewById(R.id.lec_name);
+            return title.getText().toString();
         }
 
         @Override
         public String getCurrentContentTitle(Player player) {
-            return "Title";
+            content = playerView.findViewById(R.id.series);
+            return content.getText().toString();
         }
 
         @Override
         public PendingIntent createCurrentContentIntent(Player player) {
+            PendingIntent pendingIntent;
             return null;
         }
 
         @Override
         public String getCurrentContentText(Player player) {
-            return "ContentText";
+          return "";
         }
 
         @Override
