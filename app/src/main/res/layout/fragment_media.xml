@@ -18,12 +18,14 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/lec_name"
                 style="@style/lecturer_name_fragment_media"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="الشيخ\محمد سيد حاج" />
 
             <TextView
+                android:id="@+id/lecturer_name"
                 style="@style/lec_name_fragment_media"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -42,14 +44,15 @@
                 tools:listitem="@layout/media_item" />
 
         </FrameLayout>
-            <com.google.android.exoplayer2.ui.PlayerControlView
-                android:id="@+id/player"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                app:show_timeout="0"
-                app:show_buffering="always"
-                />
+
+        <com.google.android.exoplayer2.ui.PlayerControlView
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_gravity="bottom"
+            android:visibility="gone"
+            app:show_buffering="always"
+            app:show_timeout="0" />
 
     </LinearLayout>
 

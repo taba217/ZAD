@@ -1,5 +1,8 @@
 package com.taba217.zad.ui.mediaplayer;
 
+import android.app.PendingIntent;
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.MediaItem;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.audio.AudioListener;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -28,6 +32,7 @@ import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaLoadData;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.ui.PlayerControlView;
+import com.google.android.exoplayer2.ui.PlayerNotificationManager;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.ui.StyledPlayerControlView;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
@@ -53,6 +58,7 @@ import retrofit2.Response;
 import static android.view.View.GONE;
 import static android.view.View.INVISIBLE;
 import static android.view.View.VISIBLE;
+import static com.taba217.zad.ui.mediaplayer.MediaPlayer.playerNotificationManager;
 
 public class MediaFragment extends Fragment {
 
@@ -66,6 +72,18 @@ public class MediaFragment extends Fragment {
     ProgressBar loading;
     LectureItem lectureItem;
 
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onDetach() {
+//        MediaPlayer.onDestroy();
+        super.onDetach();
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mediaModelView = new ViewModelProvider(this).get(MediaModelView.class);
@@ -77,10 +95,6 @@ public class MediaFragment extends Fragment {
         lec_name = playerview.findViewById(R.id.lec_name);
         loading = playerview.findViewById(R.id.loading_lec);
 
-        playerview.setOnFocusChangeListener((v, hasFocus) -> {
-            Toast.makeText(getActivity(), "hasFocus changed to " + hasFocus, Toast.LENGTH_SHORT).show();
-            //   changePlayerSize(hasFocus, v, inflater, container);
-        });
         mediaModelView.getdata(getArguments().getInt("lecture_id")).observe(getViewLifecycleOwner(), new Observer<LectureItem>() {
             @Override
             public void onChanged(LectureItem lecture) {
@@ -88,6 +102,7 @@ public class MediaFragment extends Fragment {
                 adapter.setItems(lecture);
                 items.addAll(lecture.getLectureSeries());
                 adapter.notifyItemRangeInserted(0, lecture.getLectureSeries().size());
+
             }
         });
         return root;
@@ -106,8 +121,6 @@ public class MediaFragment extends Fragment {
                 player = MediaPlayer.getInstance(getActivity(), playerview, items);
                 lec_name.setText(lectureItem.getName());
                 series.setText(items.get(i).getName());
-                loading.setVisibility(VISIBLE);
-                playerview.setVisibility(VISIBLE);
                 player.play();
             }
         });
@@ -115,7 +128,8 @@ public class MediaFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.hasFixedSize();
         recyclerView.setAdapter(adapter);
-
+        if (player != null)
+            playerview.setVisibility(VISIBLE);
     }
 
 
