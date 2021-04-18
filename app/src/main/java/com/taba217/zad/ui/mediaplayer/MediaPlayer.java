@@ -35,7 +35,7 @@ public class MediaPlayer {
     static ProgressBar loading;
     static PlayerControlView playerView;
     static TextView title;
-    static TextView content;
+    public static ArrayList<LectureSeriesItem> lectures;
     private static PlayerNotificationManager.MediaDescriptionAdapter mediaDescriptionAdapter = new PlayerNotificationManager
             .MediaDescriptionAdapter() {
         @Override
@@ -46,19 +46,21 @@ public class MediaPlayer {
 
         @Override
         public String getCurrentContentTitle(Player player) {
-            content = playerView.findViewById(R.id.series);
-            return content.getText().toString();
+            return lectures.get((int) instance.getCurrentWindowIndex()).getName();
         }
 
         @Override
         public PendingIntent createCurrentContentIntent(Player player) {
-            PendingIntent pendingIntent;
-            return null;
+            Intent intent = new Intent(YourService.this,MainActivity.class);
+            PendingIntent contentPendingIntent = PendingIntent.getActivity
+                    (YourService.this, 0, intent, 0);
+            return contentPendingIntent;
+//            return null;
         }
 
         @Override
         public String getCurrentContentText(Player player) {
-          return "";
+            return "";
         }
 
         @Override
@@ -70,6 +72,7 @@ public class MediaPlayer {
     public static synchronized SimpleExoPlayer getInstance(Context cxt, PlayerControlView playerview, ArrayList<LectureSeriesItem> lectures) {
         context = cxt;
         playerView = playerview;
+        MediaPlayer.lectures = lectures;
         loading = playerView.findViewById(R.id.loading_lec);
         if (instance == null) {
             instance = new SimpleExoPlayer.Builder(context).build();

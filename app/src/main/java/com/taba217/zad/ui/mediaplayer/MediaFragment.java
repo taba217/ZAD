@@ -102,7 +102,6 @@ public class MediaFragment extends Fragment {
                 adapter.setItems(lecture);
                 items.addAll(lecture.getLectureSeries());
                 adapter.notifyItemRangeInserted(0, lecture.getLectureSeries().size());
-
             }
         });
         return root;
@@ -122,14 +121,13 @@ public class MediaFragment extends Fragment {
                 lec_name.setText(lectureItem.getName());
                 series.setText(items.get(i).getName());
                 player.play();
+                playerview.setVisibility(VISIBLE);
             }
         });
         recyclerView = view.findViewById(R.id.media_recycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.hasFixedSize();
         recyclerView.setAdapter(adapter);
-        if (player != null)
-            playerview.setVisibility(VISIBLE);
     }
 
 
